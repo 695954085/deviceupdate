@@ -7,10 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link href="${pageContext.request.contextPath}/css/bootstrap.css"
-	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/zuoyou/common.css">
+	href="${pageContext.request.contextPath}/css/zuoyou/common.css?v=<%= System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
@@ -25,26 +23,8 @@
 	src="${pageContext.request.contextPath}/js/lib/bootstrap-select.min.js"></script>
 <script>
 	$(function() {
-		$.post("redis",
-		{
-			method:"menuList"
-		},function(data){
-			var contentHtml = "";
-			for(var key in data){
-				var menuTitle = key;
-				contentHtml += "<div class='meun-title'>" + menuTitle + "</div>";
-				var menuItems = data[key];
-				$.each(menuItems,function(index,menuItem){
-					contentHtml += "<div class='meun-item'><a href='" + menuItem.urlPattern + "'><span class='glyphicon " + menuItem.icon + "' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;"+ menuItem.menuItem +"</a></div>"
-				});
-			}
-			// 把contentHTML设置进去左侧导航栏
-			//$("#leftMeun").append(contentHtml);
-		},"json")
-	});
-
-	$(function() {
 		$(".meun-item").click(function() {
+			$("#collapseOne").collapse();
 			$(".meun-item").removeClass("meun-item-active");
 			$(this).addClass("meun-item-active");
 		});
@@ -53,7 +33,15 @@
 			$("#leftMeun").toggleClass("show");
 			$("#rightContent").toggleClass("pd0px");
 		});
-	
+
+		$(".list-group-item.config__item").click(function(){
+			$(".list-group-item.config__item").removeClass("is-active");
+			$(this).addClass("is-active");
+		});
+
+		$("#collapseOne").on("hidden.bs.collapse",function(){
+			$(".list-group-item.config__item").removeClass("is-active");
+		});
 	});
 	
 	$(function() {
@@ -198,21 +186,22 @@
 					</a>
 				</div>
 			</c:if>
-			<div class="panel-group" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingOne">
-					  <h4 class="panel-title">
-        			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          			配置管理
+			<div class="panel-group meun-item" role="tablist" aria-multiselectable="true">
+				<div class="panel	panel__config">
+					<div class="panel-heading  config__heading" role="tab" id="headingOne">
+					  <h4 class="panel-title config__title">
+        			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+							 class="collapse__text">
+          			<span class="glyphicon glyphicon-cog glyphicon__config"></span>&nbsp;&nbsp;&nbsp;配置管理
        				 </a>
      			  </h4>
 					</div>
-					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-						<div class="panel-body">
-							<ul class="list-group">
-								<li class="list-group-item">增加配置</li>
-								<li class="list-group-item">修改配置</li>
-								<li class="list-group-item">删除配置</li>
+					<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+						<div class="panel-body body__config">
+							<ul class="list-group config__group">
+								<li class="list-group-item config__item">增加配置</li>
+								<li class="list-group-item config__item">修改配置</li>
+								<li class="list-group-item config__item">删除配置</li>
 							</ul>
 						</div>
 					</div>

@@ -46,42 +46,42 @@
 		</div>
 		<!--页码块-->
 		<footer class="footer">
-	<nav aria-label="Page navigation">
-		<ul class="pagination">
-			<c:if test="${historyPageBean.currentPage == 1}">
-				<li class="disabled"><a href="javascript:void(0);"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-			</c:if>
-			<c:if test="${historyPageBean.currentPage != 1}">
-				<li><a href="${pageContext.request.contextPath}/driver?method=historyOperation&currentPage=${historyPageBean.currentPage - 1}"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-			</c:if>
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<c:if test="${historyPageBean.currentPage == 1}">
+						<li class="disabled"><a href="javascript:void(0);"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+					</c:if>
+					<c:if test="${historyPageBean.currentPage != 1}">
+						<li><a href="${pageContext.request.contextPath}/driver?method=historyOperation&currentPage=${historyPageBean.currentPage - 1}"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+					</c:if>
 
-			<c:forEach begin="1" end="${historyPageBean.totalPage}" var="index">
-				<c:if test="${historyPageBean.currentPage == index}">
-					<li class="active"><a href="javascript:void(0);">${index}</a></li>
-				</c:if>
-				<c:if test="${historyPageBean.currentPage != index}">
-					<li><a href="${pageContext.request.contextPath}/driver?method=historyOperation&currentPage=${index}">${index}</a></li>
-				</c:if>
-			</c:forEach>
+					<c:forEach begin="1" end="${historyPageBean.totalPage}" var="index">
+						<c:if test="${historyPageBean.currentPage == index}">
+							<li class="active"><a href="javascript:void(0);">${index}</a></li>
+						</c:if>
+						<c:if test="${historyPageBean.currentPage != index}">
+							<li><a href="${pageContext.request.contextPath}/driver?method=historyOperation&currentPage=${index}">${index}</a></li>
+						</c:if>
+					</c:forEach>
 
-			<c:if
-				test="${historyPageBean.currentPage == historyPageBean.totalPage}">
-				<li class="disabled"><a href="javascript:void(0);"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-			</c:if>
-			<c:if
-				test="${historyPageBean.currentPage != historyPageBean.totalPage}">
-				<li><a href="${pageContext.request.contextPath}/driver?method=historyOperation&currentPage=${historyPageBean.currentPage + 1}" aria-label="Next"
-					onclick="paging('${historyPageBean.currentPage + 1}')"> <span
-						aria-hidden="true">&raquo;</span></a></li>
-			</c:if>
+					<c:if
+						test="${historyPageBean.currentPage == historyPageBean.totalPage}">
+						<li class="disabled"><a href="javascript:void(0);"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+					</c:if>
+					<c:if
+						test="${historyPageBean.currentPage != historyPageBean.totalPage}">
+						<li><a href="${pageContext.request.contextPath}/driver?method=historyOperation&currentPage=${historyPageBean.currentPage + 1}" aria-label="Next"
+							onclick="paging('${historyPageBean.currentPage + 1}')"> <span
+								aria-hidden="true">&raquo;</span></a></li>
+					</c:if>
 
-		</ul>
-	</nav>
-</footer>
+				</ul>
+			</nav>
+		</footer>
 	</div>
 </c:if>
